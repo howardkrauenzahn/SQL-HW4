@@ -1,0 +1,133 @@
+ 10   drop table LabAssignment4.Applicant;/* excecute this  before any statement*/ 
+ 11   drop schema LabAssignment4 /* excecute this  before any statement*/ 
+ 12   
+ 13   /*part 1 */ 
+ 14   CREATE SCHEMA LabAssignment4; 
+ 15   
+ 16   /*part 2 */ 
+ 17   CREATE TABLE LabAssignment4.Applicant 
+ 18   ( 
+ 19   ApplicantID int primary key not null, 
+ 20   ApplicantName varchar(50) not null, 
+ 21   Age int not null, 
+ 22   WorkExpMonths int not null, 
+ 23   GMATScore int not null, 
+ 24   HighestDegree varchar(30) not null 
+ 25   ) 
+ 26   
+ 27   SELECT * FROM LabAssignment4.Applicant 
+ 28   
+ 29   /*part 3*/ 
+ 30   Insert into LabAssignment4.Applicant values 
+ 31   (1,'Brian',20,30,500,'BA') 
+ 32   Insert into LabAssignment4.Applicant values 
+ 33   (2,'Andrew',25,20,450,'BS') 
+ 34   Insert into LabAssignment4.Applicant values 
+ 35   (3,'Julian',18,0,500,'MA') 
+ 36   Insert into LabAssignment4.Applicant values 
+ 37   (4,'Jason',40,12,700,'BA') 
+ 38   Insert into LabAssignment4.Applicant values 
+ 39   (5,'George',27,5,550,'BS') 
+ 40   
+ 41   
+ 42   /*Question2*/ 
+ 43   
+ 44   ALTER TABLE LabAssignment4.Applicant 
+ 45   ADD Email VARCHAR(50) 
+ 46   
+ 47   /*Question 3*/ 
+ 48   
+ 49   ALTER TABLE LabAssignment4.Applicant 
+ 50   ALTER COLUMN WorkExpMonths decimal(4,2) 
+ 51   
+ 52   /* Question4*/ 
+ 53   
+ 54   ALTER TABLE LabAssignment4.Applicant 
+ 55   ALTER COLUMN highestdegree varchar(30) null 
+ 56   
+ 57   /* Question5*/ 
+ 58   
+ 59   ALTER TABLE LabAssignment4.Applicant 
+ 60   DROP COLUMN Email 
+ 61   select * from LabAssignment4.Applicant 
+ 62   
+ 63   
+ 64   /* Question6*/ 
+ 65   ALTER TABLE LabAssignment4.Applicant 
+ 66   ADD Gender varchar(10) check(gender in ('male' , 'female'))
+ 67   
+ 68   
+ 69   /* Question7*/ 
+ 70   ALTER TABLE LabAssignment4.Applicant 
+ 71   DROP CONSTRAINT 
+ 72   PK__Applican__39AE9148F0518335 
+ 73   
+ 74   ALTER TABLE LabAssignment4.Applicant 
+ 75   ALTER COLUMN Applicantid char(30) not null 
+ 76   
+ 77   ALTER TABLE LabAssignment4.Applicant 
+ 78   ADD CONSTRAINT PK__Applican__39AE9148F0518335 
+ 79   Primary key(ApplicantID) 
+ 80   
+ 81   
+ 82   /* Question 8*/ 
+ 83   
+ 84 ALTER TABLE LabAssignment4.Applicant 
+ 85   DROP CONSTRAINT 
+ 86   CK__Applicant__Gende__09746778 
+ 87   
+ 88   
+ 89   /* Question9*/ 
+ 90   ALTER TABLE LabAssignment4.Applicant 
+ 91   ADD CONSTRAINT DF_applicant_gmat 
+ 92   DEFAULT 000 FOR GMATScore 
+ 93   
+ 94   
+ 95   /* Question10*/ 
+ 96   
+ 97   CREATE TABLE LabAssignment4.Dept 
+ 98   ( 
+ 99   DeptID INT PRIMARY KEY NOT NULL, 
+ 100   DeptName VARCHAR (50) NOT NULL 
+ 101   ); 
+ 102   
+ 103   ALTER TABLE LabAssignment4.Applicant 
+ 104   ADD DeptID INT 
+ 105   
+ 106   ALTER TABLE LabAssignment4.Applicant 
+ 107   ADD CONSTRAINT FK_Applicant 
+ 108   FOREIGN KEY(DeptID) REFERENCES 
+ 109   LabAssignment4.Dept (DeptID) 
+ 110   
+ 111   
+ 112   /*Question 11*/ 
+ 113   
+ 114   ALTER TABLE LabAssignment4.MBA_Applicants 
+ 115   DROP CONSTRAINT 
+ 116   PK__Applican__39AE9148B9BFB5A9 
+ 117   
+ 118   CREATE CLUSTERED INDEX IX_applicants 
+ 119   ON Assignment10.MBA_Applicants (ApplicantName desc) 
+ 120   
+ 121   ALTER TABLE LabAssignment4.MBA_Applicants 
+ 122   ADD CONSTRAINT PK_applicants 
+ 123   PRIMARY KEY(applicantid) 
+ 124   
+ 125   /*Question 12*/ 
+ 126   
+ 127   CREATE NONCLUSTERED INDEX 
+ 128   IX_age 
+ 129   ON Assignment10.MBA_Applicants (ApplicantAge) 
+ 130   
+ 131   /*Question 13*/ 
+ 132
+ 133   CREATE NONCLUSTERED INDEX 
+134   IX_age_name 
+135   ON Assignment10.MBA_Applicants (ApplicantAge,ApplicantName) 
+136   
+137   /*Question 14*/ 
+138   select * from Assignment10.MBA_Applicants 
+139   
+140   CREATE nonclustered INDEX IX_GMAT 
+141   ON Assignment10.MBA_Applicants(GMATscore) 
+142   where GMATscore>500 
